@@ -1,3 +1,26 @@
+#' Retrieve metadata about an xkcd comic
+#'
+#' Given an xkcd comic number, this function retrieves a JSON object
+#' describing that comic from the xkcd website.
+#'
+#' @param number A scalar numeric vector identifying an xkcd comic number
+#'
+#' @return A list of class `xkcd` with the following fields:
+#' * month
+#' * num
+#' * link
+#' * news
+#' * safe_title
+#' * transcript
+#' * alt
+#' * img
+#' * title
+#' * day
+#'
+#' Note that many of these fields may be an empty string
+#'
+#' @importFrom jsonlite read_json
+#' @export
 xkcd <- function(number) {
 
   url <- file.path("https://xkcd.com", number, "info.0.json")
@@ -46,9 +69,23 @@ validate_xkcd <- function(x) {
   return(x)
 }
 
-
+#' Visualize xkcd comics
+#'
+#' Given an [`xkcd`] object, this [`base::plot`] method retrieves the image file associated with
+#' this comic from the xkcd website and displays it in the currently
+#' active graphics device.
+#'
+#' @param x an [`xkcd`] object
+#' @param ... Currently ignored
+#'
+#' @importFrom tools file_ext
+#' @importFrom utils download.file
+#' @importFrom png readPNG
+#' @importFrom jpeg readJPEG
+#' @importFrom grid grid.raster
+#'
 #' @exportS3Method
-plot.xkcd <- function(x) {
+plot.xkcd <- function(x, ...) {
 
   img_type <- tools::file_ext(x$img)
 

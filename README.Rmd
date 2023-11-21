@@ -1,0 +1,48 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# xkcd
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The `xkcd` package provides an R interface to retrieve data about [xkcd comics](https://xkcd.com) from the xkcd website - and most importantly, view these comics in the plot window! 
+
+## Installation
+
+You can install the development version of xkcd from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ssusnea/xkcd")
+```
+
+## Browsing Comics
+
+Given a comic number the `xkcd` function retrieves a JSON object with metadata about that comic.
+
+```{r example}
+library(xkcd)
+
+first_comic <- xkcd(1)
+first_comic
+```
+
+The most useful thing you can do with these objects is plot them, which displays the comic image in the plot window. 
+
+```{r}
+plot(first_comic)
+```
+
